@@ -37,17 +37,18 @@ class Grille:
                     cprint(var, color, "on_grey", end="")
 
             cprint("|", "red", "on_grey")
+            print("bjr")
 
     def isColonnePleine(self, colonne):
         verite = False
-        if self.matrice[0][colonne] == 1 or self.matrice[0][colonne] == 2:
+        if self.matrice[0][colonne] == 1 or self.matrice[0][colonne] == 2: #in [1,2]
             verite = True
         return verite
 
-    """"def addPion(self, colonne, numjoueur):
+    def addPion(self, colonne, numjoueur):
         
         ligne =
 
         while ligne < 0:
             if 
-        """
+        
