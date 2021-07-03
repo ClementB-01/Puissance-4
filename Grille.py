@@ -3,12 +3,12 @@ from termcolor import colored, cprint
 
 class Grille:
     def __init__(self, largeur, hauteur):
-        self.largeur = largeur
-        self.hauteur = hauteur
+        self.largeur = largeur #La largeur représente le nombre de colonne
+        self.hauteur = hauteur #la hauteur représente le nombre de ligne
         A = []
         B = []
-        for i in range(hauteur):
-            for j in range(largeur):
+        for i in range(self.hauteur):
+            for j in range(self.largeur):
                 A.append(0)
             B.append(A)
         self.matrice = B
@@ -16,17 +16,18 @@ class Grille:
         #print(len(self.matrice[0]))
 
 
-    def AfficherMatrice(self):
+
+    def AfficherMatrice(self): ## FONCTIONNEL mais penser à ajouter les coordonnées pour simplifier le jeu
         var = ' '
         color = ''
         ligne = ""
-        for i in range(self.largeur):
-            for j in range(self.hauteur):
+        for i in range(self.hauteur):
+            for j in range(self.largeur):
                 cprint("|", "blue", "on_grey", end="")
 
                 if self.matrice[i][j] == 0: ## Condition pour identifier le caractère et lui appliquer une couleur
                     var = ' '
-                    print("| ", end = "")
+                    cprint(" ", "blue", "on_grey", end = "")
                 else:
                     var = 'X'
                     color = "grey"
@@ -35,9 +36,13 @@ class Grille:
                     elif self.matrice[i][j] == 2:
                         color = "yellow"
                     cprint(var, color, "on_grey", end="")
+                #print(j, end="")
+                if j < len(self.matrice):
+                    cprint("|", "blue", "on_grey", end="")
+                else:
+                    cprint("|", "blue", "on_grey")
 
-            cprint("|", "red", "on_grey")
-            print("bjr")
+           
 
     def isColonnePleine(self, colonne):
         verite = False
@@ -46,9 +51,17 @@ class Grille:
         return verite
 
     def addPion(self, colonne, numjoueur):
-        
-        ligne =
+        ligne = 0
+        presence = True
 
-        while ligne < 0:
-            if 
+        while presence == True:
+            if self.matrice[ligne][colonne] not in [1,2]:
+                presence = False
+                print("jouable")
+                print(ligne)
+            else:
+                ligne += 1
+
+        
+        self.matrice[ligne][colonne] = numjoueur
         
