@@ -5,16 +5,15 @@ class Grille:
     def __init__(self, largeur, hauteur):
         self.largeur = largeur #La largeur représente le nombre de colonne
         self.hauteur = hauteur #la hauteur représente le nombre de ligne
-        A = []
-        B = []
+        self.matrice = []
         for i in range(self.hauteur):
+            ligne_prov = []
             for j in range(self.largeur):
-                A.append(0)
-            B.append(A)
-        self.matrice = B
+                ligne_prov.append(0)
+            self.matrice.append(ligne_prov)
+
         #print(len(self.matrice))
         #print(len(self.matrice[0]))
-
 
 
     def AfficherMatrice(self): ## FONCTIONNEL mais penser à ajouter les coordonnées pour simplifier le jeu
@@ -41,26 +40,26 @@ class Grille:
                     cprint("|", "blue", "on_grey", end="")
                 else:
                     cprint("|", "blue", "on_grey")
-
            
 
     def isColonnePleine(self, colonne):
-        verite = False
+        isFull = False
         if self.matrice[0][colonne] == 1 or self.matrice[0][colonne] == 2: #in [1,2]
-            verite = True
-        return verite
+            isFull = True
+        return isFull
+
 
     def addPion(self, colonne, numjoueur):
         ligne = self.hauteur - 1
         presence = True
 
         while presence == True:
+            print(ligne)
             if self.matrice[ligne][int(colonne)] not in [1,2]:
                 presence = False
             else:
                 ligne -= 1
-
-        print(ligne)
+        print(ligne, colonne)
         self.matrice[ligne][int(colonne)] = numjoueur
         return ligne
         

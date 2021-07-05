@@ -1,5 +1,5 @@
-from Grille import *
-from Joueur import *
+from grille import *
+from joueur import *
 
 grille = Grille(7,6)
 grille.AfficherMatrice()
@@ -12,9 +12,9 @@ def Main():
 
 
         print("Choisissez la colonne où vous voulez insérer votre jeton :")
-        colonne = input("-> ")
+        colonne = int(input("-> "))
         
-        ligne = grille.addPion(colonne,1)
+        print(grille.addPion(colonne,1))
         grille.AfficherMatrice()
 
    
