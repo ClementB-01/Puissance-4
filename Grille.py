@@ -5,9 +5,10 @@ class Grille:
     def __init__(self, largeur, hauteur):
         self.largeur = largeur #La largeur représente le nombre de colonne
         self.hauteur = hauteur #la hauteur représente le nombre de ligne
-        A = []
+        
         B = []
         for i in range(self.hauteur):
+            A = []
             for j in range(self.largeur):
                 A.append(0)
             B.append(A)
