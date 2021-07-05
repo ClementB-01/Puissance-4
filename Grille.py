@@ -51,18 +51,16 @@ class Grille:
         return verite
 
     def addPion(self, colonne, numjoueur):
-        ligne = 0
+        ligne = self.hauteur - 1
         presence = True
 
         while presence == True:
-            if self.matrice[ligne][colonne] not in [1,2]:
+            if self.matrice[ligne][int(colonne)] not in [1,2]:
                 presence = False
-                print("jouable")
-                print(ligne)
             else:
-                ligne += 1
+                ligne -= 1
 
-        
-        self.matrice[ligne][colonne] = numjoueur
+        print(ligne)
+        self.matrice[ligne][int(colonne)] = numjoueur
         return ligne
         
