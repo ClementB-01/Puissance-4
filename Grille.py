@@ -64,4 +64,5 @@ class Grille:
 
         
         self.matrice[ligne][colonne] = numjoueur
+        return ligne
         
