@@ -61,7 +61,7 @@ class Grille:
         presence = True
 
         while presence == True:
-            if self.matrice[ligne][int(colonne)] not in [1,2]:
+            if self.matrice[ligne][int(colonne)] not in [1,-1]:
                 presence = False
             else:
                 ligne -= 1

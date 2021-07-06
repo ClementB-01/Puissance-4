@@ -33,7 +33,7 @@ def Main():
 
             compteur += 1
             ligne = matrice.addPion(colonne, numjoueur)
-            victoire = isVictory2(matrice.matrice, colonne, ligne, numjoueur)
+            victoire = isVictory2(matrice, colonne, ligne, numjoueur)
             matrice.AfficherMatrice()
             draw = isDraw(matrice)
 
@@ -167,15 +167,42 @@ def isVictory2(matrice, colonne, ligne, numjoueur):
     compte2 = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
     pas = 0
 
-    for i in range(ligne - 3, ligne + 4):
-        for j in range(colonne - 3, colonne + 4):
-            if matrice[i][j] == numjoueur and ((i < ligne) or (j < colonne)):                
+    temp = [-1,True,-1,True,-1,True,-1,True]
+
+
+    for l in range(0, 4):
+        if ligne - l < 0 and temp[1]:
+            temp[0] = ligne - l + 1
+            temp[1] = False
+        elif ligne + l >= matrice.hauteur and temp[3]:
+            temp[2] = ligne + l - 2
+            temp[3] = False
+        if colonne - l < 0 and temp[5]:
+            temp[4] = colonne - l + 1
+            temp[5] = False
+        elif colonne + l >= matrice.hauteur and temp[7]:
+            temp[6] = colonne + l  - 2
+            temp[7] = False
+    if temp[0] == -1:
+        temp[0] = ligne - 3
+    if temp[2] == -1:
+        temp[2] = ligne + 4
+    if temp[4] == -1:
+        temp[4] = colonne - 3
+    if temp[6] == -1:
+        temp[6] = colonne + 4
+    #print(f"ligne - 3 = {temp[0]}, ligne + 4 = {temp[2]}, colonne - 3 = {temp[4]}, colonne + 4 = {temp[6]}")
+
+    for i in range(temp[0], temp[1]):
+        for j in range(temp[2], temp[3]):
+            #print(f"i = {i}, j = {j}")
+            if matrice.matrice[i][j] == numjoueur and ((i < ligne) or (j < colonne)):                
                 compte2[0][pas] = numjoueur
-            if matrice[i][j] == numjoueur and (((i > ligne) and (j > colonne)) or ((i < ligne) and (j < colonne))):
+            if matrice.matrice[i][j] == numjoueur and (((i > ligne) and (j > colonne)) or ((i < ligne) and (j < colonne))):
                 compte2[1][pas] = numjoueur
-            if matrice[i][j] == numjoueur and i - ligne == 0:
+            if matrice.matrice[i][j] == numjoueur and i - ligne == 0:
                 compte2[2][pas] = numjoueur
-            if matrice[i][j] == numjoueur and j - colonne == 0:
+            if matrice.matrice[i][j] == numjoueur and j - colonne == 0:
                 compte2[3][pas] = numjoueur
 
     compte = [1,1,1,1]
@@ -186,7 +213,7 @@ def isVictory2(matrice, colonne, ligne, numjoueur):
             if k == 0:
                 check = compte2[v][k]
             else:
-                if check == compte2[v][k]:
+                if check == compte2[v][k] and check == numjoueur:
                     compte[v] += 1
                 else:
                     if compte[v] < 4:
@@ -195,7 +222,7 @@ def isVictory2(matrice, colonne, ligne, numjoueur):
 
     if compte[0] >= 4 or compte[1] >= 4 or compte[2] >= 4 or compte[3] >= 4:
         victoire = True
-
+    print(f"compte1 = {compte[0]}, compte2 = {compte[1]}, compte3 = {compte[2]}, compte 4 = {compte[3]}")
     return victoire
 
 
