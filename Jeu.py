@@ -20,19 +20,29 @@ def Main():
         
     while not victoire and not draw:
         print("Choisissez la colonne où vous voulez insérer votre jeton :")
-        colonne = int(input("-> "))
-        
+        try:
+            colonne = int(input("-> "))
+        except: #Bloque la sortie du programme via CTRL + C || comment le résoudre ?
+            print("Colonne invalide")
+            colonne = matrice.largeur + 1
         if not matrice.isColonnePleine(colonne):
             if compteur % 2 == 0:
                 numjoueur = 1
             else:
                 numjoueur = 2
 
-        ligne = matrice.addPion(colonne, numjoueur)
-        #victoire = isVictory(matrice.matrice, colonne, ligne, numjoueur)
-        matrice.AfficherMatrice()
-        draw = isDraw(matrice.matrice)
+            compteur += 1
+            ligne = matrice.addPion(colonne, numjoueur)
+            victoire = isVictory(matrice.matrice, colonne, ligne, numjoueur)
+            matrice.AfficherMatrice()
+            draw = isDraw(matrice)
 
+        else:
+            print("Veuillez rejouer")
+        """except:
+            print("Entrée invalide, veuillez réessayer")
+            pass"""
+        
         if draw:
             print("Partie nulle")
             joueur1.score = joueur2.score = "0.5"
@@ -44,18 +54,20 @@ def Main():
             else:
                 joueur2.score = 1
             #f"joueur{numjoueur}.score" = "1"
-    
+        
+        
     
     print("Fin")    
 
    
-
-def isDraw(matrice):
-    draw = True
-    for i in range(len(matrice)):
-        for j in range(int(len(matrice[0])/len(matrice))):
-            if matrice[i][j] == 0:
-                draw = False
+def isDraw(matrice): #Fonctionnel
+    draw = False
+    colpleine = 0
+    for i in range(0, matrice.largeur):
+        if matrice.isColonnePleine(i):
+            colpleine += 1
+    if colpleine == 7:
+        draw = True
     return draw
 
 def isVictory(matrice, colonne, ligne, numjoueur):

@@ -47,9 +47,14 @@ class Grille:
 
     def isColonnePleine(self, colonne):
         verite = False
-        if self.matrice[0][colonne] == 1 or self.matrice[0][colonne] == 2: #in [1,2]
+        try:
+            if self.matrice[0][colonne] == 1 or self.matrice[0][colonne] == 2: #in [1,2]
+                verite = True
+        except:
+            print("Colonne inexistante")
             verite = True
         return verite
+
 
     def addPion(self, colonne, numjoueur):
         ligne = self.hauteur - 1
@@ -61,7 +66,6 @@ class Grille:
             else:
                 ligne -= 1
 
-        print(ligne)
         self.matrice[ligne][int(colonne)] = numjoueur
         return ligne
         
