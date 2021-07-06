@@ -34,7 +34,7 @@ class Grille:
                     color = "grey"
                     if self.matrice[i][j] == 1:
                         color = "red"
-                    elif self.matrice[i][j] == 2:
+                    elif self.matrice[i][j] == -1:
                         color = "yellow"
                     cprint(var, color, "on_grey", end="")
                 #print(j, end="")

@@ -29,11 +29,11 @@ def Main():
             if compteur % 2 == 0:
                 numjoueur = 1
             else:
-                numjoueur = 2
+                numjoueur = -1
 
             compteur += 1
             ligne = matrice.addPion(colonne, numjoueur)
-            victoire = isVictory(matrice.matrice, colonne, ligne, numjoueur)
+            victoire = isVictory2(matrice.matrice, colonne, ligne, numjoueur)
             matrice.AfficherMatrice()
             draw = isDraw(matrice)
 
@@ -110,7 +110,6 @@ def isVictory(matrice, colonne, ligne, numjoueur):
         victory = True
     return victory
 
-
 def isCLigne(matrice, i, j, numjoueur, sens, dir):
     compteur = 0
     if sens == "ho":
@@ -162,6 +161,43 @@ def isCLigne(matrice, i, j, numjoueur, sens, dir):
                     compteur += 1
 
     return compteur
+
+def isVictory2(matrice, colonne, ligne, numjoueur):
+    victoire = False
+    compte2 = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
+    pas = 0
+
+    for i in range(ligne - 3, ligne + 4):
+        for j in range(colonne - 3, colonne + 4):
+            if matrice[i][j] == numjoueur and ((i < ligne) or (j < colonne)):                
+                compte2[0][pas] = numjoueur
+            if matrice[i][j] == numjoueur and (((i > ligne) and (j > colonne)) or ((i < ligne) and (j < colonne))):
+                compte2[1][pas] = numjoueur
+            if matrice[i][j] == numjoueur and i - ligne == 0:
+                compte2[2][pas] = numjoueur
+            if matrice[i][j] == numjoueur and j - colonne == 0:
+                compte2[3][pas] = numjoueur
+
+    compte = [1,1,1,1]
+    check = 0
+
+    for v in range(len(compte2)):
+        for k in range(len(compte2[0])):
+            if k == 0:
+                check = compte2[v][k]
+            else:
+                if check == compte2[v][k]:
+                    compte[v] += 1
+                else:
+                    if compte[v] < 4:
+                        compte[v] = 1
+                check = compte2[v][k]
+
+    if compte[0] >= 4 or compte[1] >= 4 or compte[2] >= 4 or compte[3] >= 4:
+        victoire = True
+
+    return victoire
+
 
 
 Main()
