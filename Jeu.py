@@ -168,8 +168,6 @@ def isVictory2(matrice, colonne, ligne, numjoueur):
     pas = 0
 
     temp = [-1,True,-1,True,-1,True,-1,True]
-
-
     for l in range(0, 4):
         if ligne - l < 0 and temp[1]:
             temp[0] = ligne - l + 1
@@ -204,6 +202,7 @@ def isVictory2(matrice, colonne, ligne, numjoueur):
                 compte2[2][pas] = numjoueur
             if matrice.matrice[i][j] == numjoueur and j - colonne == 0:
                 compte2[3][pas] = numjoueur
+            pas += 1
 
     compte = [1,1,1,1]
     check = 0

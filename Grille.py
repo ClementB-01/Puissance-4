@@ -48,7 +48,7 @@ class Grille:
     def isColonnePleine(self, colonne):
         verite = False
         try:
-            if self.matrice[0][colonne] == 1 or self.matrice[0][colonne] == 2: #in [1,2]
+            if self.matrice[0][colonne] == 1 or self.matrice[0][colonne] == -1: #in [1,2]
                 verite = True
         except:
             print("Colonne inexistante")
